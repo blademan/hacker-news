@@ -12,7 +12,7 @@ export default function Buttons() {
     Prev
    </button>
    <span className="px-2">
-    {page + 1} of {nbPages}
+    {page + 1} of {nbPages || '10'}
    </span>
    <button
     disabled={isLoading}
