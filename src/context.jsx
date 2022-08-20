@@ -31,12 +31,26 @@ export const AppProvider = ({ children }) => {
   }
  };
 
- console.log(state);
+ const handlePage = (page) => {
+  dispatch({ type: HANDLE_PAGE, payload: page });
+ };
+
+ const removeHits = (id) => {
+  dispatch({ type: REMOVE_STORY, payload: id });
+ };
+ const handleSearch = (query) => {
+  dispatch({ type: HANDLE_SEARCH, payload: query });
+ };
+
  useEffect(() => {
   fetchStories(`${API_ENDPOINT}query=${state.query}&page=${state.page}`);
  }, [state.query, state.page]);
 
- return <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>;
+ return (
+  <AppContext.Provider value={{ ...state, removeHits, handlePage, handleSearch }}>
+   {children}
+  </AppContext.Provider>
+ );
 };
 
 export const useGlobalContext = () => {
